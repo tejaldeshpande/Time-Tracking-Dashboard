@@ -1,32 +1,44 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div id="app" class="px-6 py-10 ">
+    <div class="text-3xl text-primary-light text-center mb-6">Time Tracking Dashboard</div>
+    <user-container class="mt-8 mb-36"></user-container>
+    <div class="space-y-16">
+      <container v-for="cat in categories" :key="cat.title" :section="cat"></container>
     </div>
-    <router-view/>
+
   </div>
 </template>
 
+<script>
+import categories from '../public/content/data/data.json'
+import container from '@/components/container.vue'
+import UserContainer from './components/user-container.vue'
+
+
+export default {
+  data() {
+    return {
+      categories: categories
+    }
+  },
+  components: {
+    container,
+    UserContainer
+  },
+}
+</script>
+
+
 <style lang="scss">
+html{
+  background-color: hsl(226, 43%, 10%);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
+
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
